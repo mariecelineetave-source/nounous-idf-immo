@@ -12,15 +12,11 @@
    La clé « secrète » (sb_secret_…), elle, n'a jamais sa place dans ce dépôt
    ni dans aucun fichier du site.
 
-   ⚠️ À RENSEIGNER : les deux valeurs du projet Supabase « nounous-idf-immo ».
-   Supabase → le projet → Project Settings → API :
-     url = « Project URL »
-     cle = la clé publiable (sb_publishable_… , anciennement « anon key »)
-   Tant qu'elles sont vides, la page « Mon espace » affiche un message
-   d'attente au lieu de planter.
+   Projet Supabase « nounous-idf-immo » — organisation idf.immo, région
+   West EU (Paris, eu-west-3). Renseigné le 20 août 2026.
    ===================================================================== */
 
 window.CONFIG_BASE = {
-  url: "",
-  cle: ""
+  url: "https://bhyshzolavkgcdtdfrkj.supabase.co",
+  cle: "sb_publishable_RoGz-PEaVBcQw51Wt7xiZg_REJDmlQ2"
 };

@@ -32,11 +32,15 @@ l'autre** : les deux publics n'ont pas les mêmes craintes.
    cliqué, aucun message ne passe. Si le formulaire cesse de fonctionner,
    vérifier ce point en premier. (L'adresse étant déjà activée pour
    gardiens.idf.immo, il est possible que rien ne soit à faire.)
-4. **Supabase.** `base/config.js` attend les deux valeurs publiques du projet
-   Supabase `nounous-idf-immo` (Project URL + clé publiable). Tant qu'elles sont
-   vides, `mon-espace.html` affiche un message d'attente au lieu de planter.
-   Le schéma est dans `base/schema.sql`, à coller dans le SQL Editor ; la marche
-   à suivre est dans `base/installer.html`.
+4. **Supabase.** Le projet `nounous-idf-immo` est créé (organisation `idf.immo`,
+   région West EU / Paris, offre gratuite) et `base/config.js` porte ses deux
+   valeurs publiques depuis le 20 août 2026. Il a été créé avec les réglages
+   attendus par le schéma : Data API activée, exposition automatique des
+   nouvelles tables DÉSACTIVÉE, RLS automatique ACTIVÉE.
+   **Reste à faire** : exécuter `base/schema.sql` dans le SQL Editor pour créer
+   les tables ; la marche à suivre pas à pas est dans `base/installer.html`.
+   Tant que les tables n'existent pas, `mon-espace.html` se connecte mais ne
+   trouve rien à afficher.
 
 ## ⚠️ À FAIRE AVANT D'OUVRIR LE RÉSEAU À DE VRAIES NOUNOUS
 

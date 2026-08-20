@@ -76,10 +76,10 @@ téléphone et le courriel fonctionnent toujours.
    dépôt : le site ne peut pas être publié depuis `antony-immo`.
 2. **DNS** : enregistrement CNAME `nounous` → `mariecelineetave-source.github.io.`
    chez Gandi, puis GitHub Pages sur `main`, racine.
-3. **Supabase** : renseigner les deux valeurs publiques du projet dans
-   `base/config.js`, puis exécuter `base/schema.sql` (marche à suivre dans
-   `base/installer.html`). Tant que c'est vide, `mon-espace.html` affiche un
-   message d'attente au lieu de planter.
+3. **Supabase** : le projet `nounous-idf-immo` existe (organisation `idf.immo`,
+   région West EU / Paris) et ses deux valeurs publiques sont renseignées dans
+   `base/config.js`. Reste à exécuter `base/schema.sql` pour créer les tables
+   (marche à suivre dans `base/installer.html`).
 4. **SMTP** : brancher un vrai expéditeur d'e-mails sur Supabase (Brevo) **avant**
    toute diffusion du site. L'envoi inclus est bridé à quelques messages par
    heure : sans cela, la promesse « vous recevez un lien de connexion » ne serait
