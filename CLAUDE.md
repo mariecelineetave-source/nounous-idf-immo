@@ -49,6 +49,20 @@ déclaré, avec `actif = false`.
 C'est une divergence, pas un choix : en l'état, les opportunités des nounous
 n'apparaîtront jamais dans le back-office commun.
 
+**Comment savoir si la base centrale est prête, sans demander à personne.**
+Le socle doit y créer une vue `nounous`. Une simple requête publique le dit :
+
+```
+curl -s -o /dev/null -w '%{http_code}\n' \
+  "https://uiciolavnalimrjlpesx.supabase.co/rest/v1/nounous?select=id&limit=1" \
+  -H "apikey: sb_publishable_rCVYAzc9PyppEfijDMdHzg_C--mKXj1"
+```
+
+**404** = la vue n'existe pas encore, le correctif n'a pas été exécuté.
+**401** = la vue existe et son verrou tient (c'est la réponse attendue de la vue
+`gardiens` aujourd'hui) : la base est prête, on peut basculer `base/config.js`.
+Ne jamais déduire l'état de la base d'une conversation : le vérifier.
+
 **Ne rien construire de nouveau sur cette base séparée.** La remise en ordre —
 pointer `base/config.js` sur la base centrale, réécrire `mon-espace.html` dans le
 langage du socle, activer le réseau, supprimer le projet séparé — attend
