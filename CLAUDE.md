@@ -42,15 +42,19 @@ Supabase, une table `prescripteurs` avec une colonne `categorie`
 (`gardien`, `etudiant`, `association`, `nounou`, `autre`), et un seul
 back-office pour tous les réseaux. Son README est formel : *« Il n'y a pas — et
 il n'y aura jamais — une table par réseau. »* Le réseau `nounous` y est déjà
-déclaré, avec `actif = false`.
+déclaré et **actif depuis le 21 août 2026**.
 
-**Or ce site pointe aujourd'hui sur un projet Supabase séparé**
+**Ce site a longtemps pointé sur un projet Supabase séparé**
 (`bhyshzolavkgcdtdfrkj`), créé le 20 août 2026 avant que le socle ne soit connu.
-C'est une divergence, pas un choix : en l'état, les opportunités des nounous
-n'apparaîtront jamais dans le back-office commun.
+C'était une divergence, pas un choix : en l'état, les opportunités des nounous
+ne pouvaient pas apparaître dans le back-office commun. **Réparé le 21 août
+2026** : `base/config.js` désigne désormais le socle, dont la vue `nounous`
+existe depuis le correctif-1.
 
-**Comment savoir si la base centrale est prête, sans demander à personne.**
-Le socle doit y créer une vue `nounous`. Une simple requête publique le dit :
+Si des fiches ont été créées dans le projet séparé avant la bascule, elles y
+sont restées : les reprendre à la main, ou les ressaisir depuis le back-office.
+
+**Comment vérifier que la base centrale répond, sans demander à personne :**
 
 ```
 curl -s -o /dev/null -w '%{http_code}\n' \
@@ -58,16 +62,15 @@ curl -s -o /dev/null -w '%{http_code}\n' \
   -H "apikey: sb_publishable_rCVYAzc9PyppEfijDMdHzg_C--mKXj1"
 ```
 
-**404** = la vue n'existe pas encore, le correctif n'a pas été exécuté.
-**401** = la vue existe et son verrou tient (c'est la réponse attendue de la vue
-`gardiens` aujourd'hui) : la base est prête, on peut basculer `base/config.js`.
-Ne jamais déduire l'état de la base d'une conversation : le vérifier.
+**404** = la vue n'existe pas, un correctif manque.
+**401** = la vue existe et son verrou tient : c'est la réponse attendue, et
+celle que renvoie la base aujourd'hui. Ne jamais déduire l'état de la base
+d'une conversation : le vérifier.
 
-**Ne rien construire de nouveau sur cette base séparée.** La remise en ordre —
-pointer `base/config.js` sur la base centrale, réécrire `mon-espace.html` dans le
-langage du socle, activer le réseau, supprimer le projet séparé — attend
-l'arbitrage de Marie-Céline. Le socle appartient au dépôt `app-idf-immo` : une
-seule session à la fois doit le modifier.
+**Ne jamais créer un second projet Supabase pour ce site.** Le socle appartient
+au dépôt `app-idf-immo` : une seule session à la fois doit le modifier. Il reste
+à supprimer le projet séparé `bhyshzolavkgcdtdfrkj` une fois ses éventuelles
+fiches reprises.
 
 ## État du projet
 
@@ -84,20 +87,16 @@ Fait :
    construire a été retirée le 20 août 2026 pour qu'il n'existe qu'une seule
    vérité.)
 2. **Le DNS et GitHub Pages** — le site répond.
-3. **Supabase.** Projet `nounous-idf-immo` (organisation `idf.immo`, région West
-   EU / Paris, offre gratuite), créé avec les réglages qu'attend le schéma : Data
-   API activée, exposition automatique des nouvelles tables DÉSACTIVÉE, RLS
-   automatique ACTIVÉE. `base/config.js` porte ses deux valeurs publiques.
-   **`base/schema.sql` a été exécuté le 21 août 2026** — `Success. No rows
-   returned`, les tables et leurs verrous sont en place.
+3. **Supabase.** Le site est raccordé au **socle commun** de la famille
+   (projet `uiciolavnalimrjlpesx`, celui de `app.idf.immo`) depuis le 21 août
+   2026. `base/config.js` porte ses deux valeurs publiques, la vue `nounous` y
+   existe et le réseau est actif.
 
 Reste à faire :
 
-4. **Se déclarer administratrice.** La commande est au bloc 11 de
-   `base/schema.sql` (et sur `base/installer.html`). Elle ne fonctionne
-   qu'**après** une première connexion à `mon-espace.html` avec
-   `contact@idf.immo` : sans cela, elle ne trouve personne à qui donner les
-   droits.
+4. **Se déclarer administratrice.** Sur le socle commun, la table
+   `administrateurs` vaut pour tous les réseaux : si c'est déjà fait pour
+   gardiens, il n'y a rien à refaire ici.
 5. **Le SMTP** — voir l'avertissement ci-dessous. C'est le seul vrai verrou
    avant diffusion.
 6. **`Enforce HTTPS`** dans GitHub → Settings → Pages, si ce n'est pas déjà

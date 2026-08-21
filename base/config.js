@@ -1,22 +1,30 @@
 /* =====================================================================
    nounous.idf.immo — coordonnées de la base
 
+   La base n'appartient pas à ce site : c'est celle de toute la famille
+   idf.immo, la même que gardiens, étudiants, associations et pros,
+   pilotée depuis app.idf.immo (dépôt app-idf-immo). On ne crée JAMAIS un
+   second projet Supabase pour un site de la famille : Marie-Céline doit
+   voir tous les réseaux au même endroit.
+
+   Ce site a justement vécu l'erreur : ouvert le 20 août 2026 sur un projet
+   à lui (bhyshzolavkgcdtdfrkj), ses fiches et ses opportunités
+   n'arrivaient pas dans le back-office. Raccordé au socle commun le
+   21 août 2026.
+
    Ces deux valeurs sont PUBLIQUES par conception : elles voyagent dans le
    navigateur de chaque visiteuse, et Supabase les qualifie lui-même de
-   « safe to use in a browser ». Les voir ne donne accès à rien.
+   « safe to use in a browser ». Les voir ne donne accès à rien. Ce qui
+   protège les données, ce sont les règles par ligne du socle : la base
+   refuse de servir à une nounou autre chose que ses propres opportunités.
 
-   Ce qui protège réellement les données, ce sont les règles installées par
-   base/schema.sql : la base refuse de servir à une nounou autre chose que
-   ses propres opportunités, quelle que soit la requête qu'on lui adresse.
+   La clé secrète (sb_secret_…) n'a sa place ni ici ni dans aucun fichier.
 
-   La clé « secrète » (sb_secret_…), elle, n'a jamais sa place dans ce dépôt
-   ni dans aucun fichier du site.
-
-   Projet Supabase « nounous-idf-immo » — organisation idf.immo, région
-   West EU (Paris, eu-west-3). Renseigné le 20 août 2026.
+   La vue « nounous » que ce site interroge est créée par le fichier
+   base/correctif-1.sql du dépôt app-idf-immo.
    ===================================================================== */
 
 window.CONFIG_BASE = {
-  url: "https://bhyshzolavkgcdtdfrkj.supabase.co",
-  cle: "sb_publishable_RoGz-PEaVBcQw51Wt7xiZg_REJDmlQ2"
+  url: "https://uiciolavnalimrjlpesx.supabase.co",
+  cle: "sb_publishable_rCVYAzc9PyppEfijDMdHzg_C--mKXj1"
 };

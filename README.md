@@ -76,7 +76,7 @@ téléphone et le courriel fonctionnent toujours.
    toute diffusion du site. L'envoi inclus est bridé à quelques messages par
    heure : sans cela, la promesse « vous recevez un lien de connexion » ne serait
    pas tenue.
-2. **Se déclarer administratrice** : la commande du bloc 11 de `base/schema.sql`,
+2. **Se déclarer administratrice** : sur le socle commun (dépôt `app-idf-immo`),
    à lancer après une première connexion à `mon-espace.html` avec
    `contact@idf.immo`.
 3. **`Enforce HTTPS`** dans GitHub → Settings → Pages.
@@ -88,8 +88,8 @@ téléphone et le courriel fonctionnent toujours.
 
 - Le dépôt, le site à la racine, GitHub Pages et le DNS chez Gandi — le site
   répond.
-- Le projet Supabase `nounous-idf-immo` (Paris), ses deux valeurs publiques dans
-  `base/config.js`, et `base/schema.sql` exécuté le 21 août 2026 : les tables et
+- Le raccordement au socle commun de la famille (projet de `app.idf.immo`),
+  ses deux valeurs publiques dans `base/config.js` : les tables et
   leurs verrous sont en place.
 
 ## À valider avant mise en ligne
