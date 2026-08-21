@@ -5,16 +5,55 @@ assistantes maternelles agréées, gardes d'enfants à domicile, auxiliaires
 parentales, gardes partagées. Une nounou partage l'opportunité d'une famille
 qui envisage de vendre ; si la vente se réalise, elle reçoit **1 000 €**.
 
-Membre de la famille `idf.immo` (voir antony.immo, cse.idf.immo,
-associations.idf.immo, etudiants.idf.immo, gardiens.idf.immo). **Chaque site est
-autonome : ne jamais mélanger les contenus, ne jamais modifier un autre dépôt
-depuis celui-ci.**
+## La famille `idf.immo` — composition arrêtée le 21 août 2026
+
+La famille `idf.immo`, ce sont **les réseaux de prescripteurs et leur socle**, et
+rien d'autre :
+
+| Domaine | Rôle |
+|---|---|
+| `gardiens.idf.immo` | réseau des gardiens et gardiennes d'immeubles |
+| `etudiants.idf.immo` | réseau étudiant |
+| `associations.idf.immo` | réseau des associations loi 1901 |
+| `nounous.idf.immo` | **ce site** |
+| `pros.idf.immo` | réseau des professionnels — à créer |
+| `app.idf.immo` | le socle commun et le back-office |
+
+**`antony.immo`, `paris7e.immo` et `cse.immo` n'en font PAS partie.** Arbitré par
+Marie-Céline le 21 août 2026 : ce sont ses sites à elle — vitrines et offre
+commerciale — sans prescripteurs. Ils n'ont pas de compte dans la base commune,
+le socle n'a pas à les connaître, et on ne les cite jamais comme membres de la
+famille. **Ne jamais les réintroduire dans cette liste**, quelle que soit la
+ressemblance de charte graphique.
+
+**Chaque site reste autonome : ne jamais mélanger les contenus, ne jamais
+modifier un autre dépôt depuis celui-ci.**
 
 Le site reprend la mécanique de `gardiens.idf.immo` (même prime, même parcours,
 même formulaire, même espace personnel) avec un **texte entièrement réécrit**
 pour des prescriptrices nounous. Quand une règle change ici, vérifier si elle
 doit changer là-bas aussi — mais **ne jamais copier un texte d'un site à
 l'autre** : les deux publics n'ont pas les mêmes craintes.
+
+## ⚠️ Architecture : une seule base pour toute la famille
+
+`app.idf.immo` (dépôt `app-idf-immo`) est le **socle commun** : une seule base
+Supabase, une table `prescripteurs` avec une colonne `categorie`
+(`gardien`, `etudiant`, `association`, `nounou`, `autre`), et un seul
+back-office pour tous les réseaux. Son README est formel : *« Il n'y a pas — et
+il n'y aura jamais — une table par réseau. »* Le réseau `nounous` y est déjà
+déclaré, avec `actif = false`.
+
+**Or ce site pointe aujourd'hui sur un projet Supabase séparé**
+(`bhyshzolavkgcdtdfrkj`), créé le 20 août 2026 avant que le socle ne soit connu.
+C'est une divergence, pas un choix : en l'état, les opportunités des nounous
+n'apparaîtront jamais dans le back-office commun.
+
+**Ne rien construire de nouveau sur cette base séparée.** La remise en ordre —
+pointer `base/config.js` sur la base centrale, réécrire `mon-espace.html` dans le
+langage du socle, activer le réseau, supprimer le projet séparé — attend
+l'arbitrage de Marie-Céline. Le socle appartient au dépôt `app-idf-immo` : une
+seule session à la fois doit le modifier.
 
 ## État du projet
 
