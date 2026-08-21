@@ -8,9 +8,10 @@ parentales, gardes partagées.
 vendre. Si la vente se réalise, elle reçoit **1 000 € nets**, par virement, dans
 les 15 jours suivant la signature chez le notaire.
 
-> ⚠️ **Le site n'est pas encore en ligne.** Il attend son dépôt, son
-> enregistrement DNS et la configuration de Supabase — voir « Ce qu'il reste à
-> faire » plus bas.
+> ✅ **Le site est en ligne** sur https://nounous.idf.immo depuis le 20 août 2026.
+> Il est publié depuis ce dépôt (GitHub Pages, branche `main`, racine) avec un
+> enregistrement CNAME `nounous` chez Gandi. La base Supabase est installée.
+> Il reste le SMTP — voir « Ce qu'il reste à faire ».
 
 ---
 
@@ -71,22 +72,25 @@ téléphone et le courriel fonctionnent toujours.
 
 ## Ce qu'il reste à faire
 
-1. **Créer le dépôt** `mariecelineetave-source/nounous-idf-immo` et y déplacer le
-   contenu de ce dossier à la racine. GitHub Pages n'accepte qu'un domaine par
-   dépôt : le site ne peut pas être publié depuis `antony-immo`.
-2. **DNS** : enregistrement CNAME `nounous` → `mariecelineetave-source.github.io.`
-   chez Gandi, puis GitHub Pages sur `main`, racine.
-3. **Supabase** : le projet `nounous-idf-immo` existe (organisation `idf.immo`,
-   région West EU / Paris) et ses deux valeurs publiques sont renseignées dans
-   `base/config.js`. Reste à exécuter `base/schema.sql` pour créer les tables
-   (marche à suivre dans `base/installer.html`).
-4. **SMTP** : brancher un vrai expéditeur d'e-mails sur Supabase (Brevo) **avant**
+1. **SMTP** : brancher un vrai expéditeur d'e-mails (Brevo) sur Supabase **avant**
    toute diffusion du site. L'envoi inclus est bridé à quelques messages par
    heure : sans cela, la promesse « vous recevez un lien de connexion » ne serait
    pas tenue.
-5. **FormSubmit** : vérifier que `contact@idf.immo` est bien activé (un courriel
-   de confirmation est envoyé au tout premier envoi ; l'adresse est déjà utilisée
-   par gardiens.idf.immo, il n'y a peut-être rien à faire).
+2. **Se déclarer administratrice** : la commande du bloc 11 de `base/schema.sql`,
+   à lancer après une première connexion à `mon-espace.html` avec
+   `contact@idf.immo`.
+3. **`Enforce HTTPS`** dans GitHub → Settings → Pages.
+4. **FormSubmit** : vérifier que `contact@idf.immo` est bien activé pour ce site
+   (un courriel de confirmation part au tout premier envoi ; l'adresse est déjà
+   utilisée par gardiens.idf.immo, il n'y a peut-être rien à faire).
+
+### Déjà fait
+
+- Le dépôt, le site à la racine, GitHub Pages et le DNS chez Gandi — le site
+  répond.
+- Le projet Supabase `nounous-idf-immo` (Paris), ses deux valeurs publiques dans
+  `base/config.js`, et `base/schema.sql` exécuté le 21 août 2026 : les tables et
+  leurs verrous sont en place.
 
 ## À valider avant mise en ligne
 

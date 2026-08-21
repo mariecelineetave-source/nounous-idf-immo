@@ -16,31 +16,47 @@ pour des prescriptrices nounous. Quand une règle change ici, vérifier si elle
 doit changer là-bas aussi — mais **ne jamais copier un texte d'un site à
 l'autre** : les deux publics n'ont pas les mêmes craintes.
 
-## État du projet — ce qui reste à faire
+## État du projet
 
-1. **Le dépôt.** Le site vit pour l'instant dans le dossier `nounous.idf.immo/`
-   du dépôt `antony-immo`, sur la branche de travail. Il doit être déplacé dans
-   son propre dépôt `mariecelineetave-source/nounous-idf-immo`
-   (GitHub Pages n'accepte qu'un domaine par dépôt : il ne peut pas être publié
-   depuis `antony-immo`).
-2. **Le DNS.** Enregistrement CNAME `nounous` → `mariecelineetave-source.github.io.`
-   chez Gandi, puis GitHub Pages sur la branche `main`, racine, avec le `CNAME`.
-3. **FormSubmit.** `partager.html` poste réellement vers
+**Le site est en ligne sur https://nounous.idf.immo depuis le 20 août 2026.**
+Publié depuis ce dépôt par GitHub Pages (branche `main`, racine, avec le
+`CNAME`), avec un enregistrement CNAME `nounous` →
+`mariecelineetave-source.github.io.` chez Gandi.
+
+Fait :
+
+1. **Le dépôt** `mariecelineetave-source/nounous-idf-immo`, public, le site à la
+   racine. (GitHub Pages n'acceptant qu'un domaine par dépôt, ce site ne peut pas
+   être publié depuis `antony-immo` : la copie de travail qui y avait servi à le
+   construire a été retirée le 20 août 2026 pour qu'il n'existe qu'une seule
+   vérité.)
+2. **Le DNS et GitHub Pages** — le site répond.
+3. **Supabase.** Projet `nounous-idf-immo` (organisation `idf.immo`, région West
+   EU / Paris, offre gratuite), créé avec les réglages qu'attend le schéma : Data
+   API activée, exposition automatique des nouvelles tables DÉSACTIVÉE, RLS
+   automatique ACTIVÉE. `base/config.js` porte ses deux valeurs publiques.
+   **`base/schema.sql` a été exécuté le 21 août 2026** — `Success. No rows
+   returned`, les tables et leurs verrous sont en place.
+
+Reste à faire :
+
+4. **Se déclarer administratrice.** La commande est au bloc 11 de
+   `base/schema.sql` (et sur `base/installer.html`). Elle ne fonctionne
+   qu'**après** une première connexion à `mon-espace.html` avec
+   `contact@idf.immo` : sans cela, elle ne trouve personne à qui donner les
+   droits.
+5. **Le SMTP** — voir l'avertissement ci-dessous. C'est le seul vrai verrou
+   avant diffusion.
+6. **`Enforce HTTPS`** dans GitHub → Settings → Pages, si ce n'est pas déjà
+   coché.
+7. **FormSubmit.** `partager.html` poste réellement vers
    `https://formsubmit.co/ajax/contact@idf.immo`. **Ce service exige une
    activation unique** : au tout premier envoi, FormSubmit adresse un courriel de
    confirmation à `contact@idf.immo` ; tant que le lien qu'il contient n'est pas
    cliqué, aucun message ne passe. Si le formulaire cesse de fonctionner,
    vérifier ce point en premier. (L'adresse étant déjà activée pour
-   gardiens.idf.immo, il est possible que rien ne soit à faire.)
-4. **Supabase.** Le projet `nounous-idf-immo` est créé (organisation `idf.immo`,
-   région West EU / Paris, offre gratuite) et `base/config.js` porte ses deux
-   valeurs publiques depuis le 20 août 2026. Il a été créé avec les réglages
-   attendus par le schéma : Data API activée, exposition automatique des
-   nouvelles tables DÉSACTIVÉE, RLS automatique ACTIVÉE.
-   **Reste à faire** : exécuter `base/schema.sql` dans le SQL Editor pour créer
-   les tables ; la marche à suivre pas à pas est dans `base/installer.html`.
-   Tant que les tables n'existent pas, `mon-espace.html` se connecte mais ne
-   trouve rien à afficher.
+   gardiens.idf.immo, il est possible que rien ne soit à faire — mais cela n'a
+   pas encore été vérifié pour ce site.)
 
 ## ⚠️ À FAIRE AVANT D'OUVRIR LE RÉSEAU À DE VRAIES NOUNOUS
 
