@@ -16,7 +16,7 @@ rien d'autre :
 | `etudiants.idf.immo` | réseau étudiant |
 | `associations.idf.immo` | réseau des associations loi 1901 |
 | `nounous.idf.immo` | **ce site** |
-| `pros.idf.immo` | réseau des professionnels — à créer |
+| `pros.idf.immo` | réseau des professionnels de proximité — coiffeurs, artisans, commerçants… — **à créer** |
 | `app.idf.immo` | le socle commun et le back-office |
 
 **`antony.immo`, `paris7e.immo` et `cse.immo` n'en font PAS partie.** Arbitré par
