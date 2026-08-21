@@ -219,6 +219,23 @@ const ETATS = {
 const PARCOURS = ["recue","qualifiee","contact_en_cours","projet_immobilier","vente_realisee","prime_versee"];
 const EN_COURS = ["recue","qualifiee","contact_en_cours","projet_immobilier"];
 
+/* Tant qu'une nounou ne nous a pas donné son prénom, on le devine à partir de
+   son adresse. « fatou.diallo@… » donne « Fatou Diallo », « jean-marc@… » donne
+   « Jean-Marc ». Mais une boîte générique ou une adresse avec des chiffres ne
+   donne rien : mieux vaut « Bonjour » tout court qu'un « Bonjour contact ». */
+const BOITES_GENERIQUES = ["contact","info","infos","bonjour","hello","admin",
+  "direction","noreply","nepasrepondre","mail","email","postmaster","webmaster","secretariat"];
+
+function joliPrenom(brut){
+  const s = String(brut || "").split("@")[0].replace(/[._+]+/g, " ").trim();
+  if (s.length < 2) return "";
+  if (/\d/.test(s)) return "";
+  if (BOITES_GENERIQUES.indexOf(s.toLowerCase().replace(/[\s-]+/g, "")) !== -1) return "";
+  return s.split(/\s+/).map(mot =>
+    mot.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join("-")
+  ).join(" ");
+}
+
 const $ = (id) => document.getElementById(id);
 const montre = (id) => { ["ecran-connexion","ecran-attente","ecran-espace"].forEach(e => $(e).hidden = (e !== id)); };
 
@@ -272,14 +289,15 @@ async function ouvrir(session){
   // La fiche de la nounou est créée au premier passage, jamais avant.
   let { data: fiche } = await base.from("nounous").select("*").eq("id", utilisateur.id).maybeSingle();
   if (!fiche){
-    const prenom = (utilisateur.email || "").split("@")[0];
+    const prenom = joliPrenom(utilisateur.email) || String(utilisateur.email || "").split("@")[0];
     const { data } = await base.from("nounous")
       .insert({ id: utilisateur.id, email: utilisateur.email, prenom })
       .select().maybeSingle();
     fiche = data || { prenom, email: utilisateur.email };
   }
 
-  texte($("salut"), T("Bonjour") + " " + (fiche.prenom || ""));
+  const prenomAffiche = joliPrenom(fiche.prenom) || joliPrenom(utilisateur.email);
+  texte($("salut"), prenomAffiche ? T("Bonjour") + " " + prenomAffiche : T("Bonjour"));
   texte($("sous-salut"), [fiche.metier, fiche.commune].filter(Boolean).join(", ") || fiche.email);
 
   const [{ data: opportunites }, { data: primes }] = await Promise.all([
