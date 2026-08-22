@@ -11,7 +11,7 @@ les 15 jours suivant la signature chez le notaire.
 > ✅ **Le site est en ligne** sur https://nounous.idf.immo depuis le 20 août 2026.
 > Il est publié depuis ce dépôt (GitHub Pages, branche `main`, racine) avec un
 > enregistrement CNAME `nounous` chez Gandi. La base Supabase est installée.
-> Il reste le SMTP — voir « Ce qu'il reste à faire ».
+> Le SMTP est branché (Brevo), vérifié le 22 août 2026.
 
 ---
 
@@ -72,11 +72,7 @@ téléphone et le courriel fonctionnent toujours.
 
 ## Ce qu'il reste à faire
 
-1. **SMTP** : brancher un vrai expéditeur d'e-mails (Brevo) sur Supabase **avant**
-   toute diffusion du site. L'envoi inclus est bridé à quelques messages par
-   heure : sans cela, la promesse « vous recevez un lien de connexion » ne serait
-   pas tenue.
-2. **Se déclarer administratrice** : sur le socle commun (dépôt `app-idf-immo`),
+1. **Se déclarer administratrice** : sur le socle commun (dépôt `app-idf-immo`),
    à lancer après une première connexion à `mon-espace.html` avec
    `contact@idf.immo`.
 3. **`Enforce HTTPS`** dans GitHub → Settings → Pages.
