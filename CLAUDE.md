@@ -51,8 +51,9 @@ ne pouvaient pas apparaître dans le back-office commun. **Réparé le 21 août
 2026** : `base/config.js` désigne désormais le socle, dont la vue `nounous`
 existe depuis le correctif-1.
 
-Si des fiches ont été créées dans le projet séparé avant la bascule, elles y
-sont restées : les reprendre à la main, ou les ressaisir depuis le back-office.
+Vérifié le 22 août 2026 avant de tourner la page : le projet séparé ne
+contenait qu'une fiche, le compte de test `contact@idf.immo`, et aucune
+opportunité, prime ou événement. Rien n'a été perdu à la bascule.
 
 **Comment vérifier que la base centrale répond, sans demander à personne :**
 
@@ -68,9 +69,8 @@ celle que renvoie la base aujourd'hui. Ne jamais déduire l'état de la base
 d'une conversation : le vérifier.
 
 **Ne jamais créer un second projet Supabase pour ce site.** Le socle appartient
-au dépôt `app-idf-immo` : une seule session à la fois doit le modifier. Il reste
-à supprimer le projet séparé `bhyshzolavkgcdtdfrkj` une fois ses éventuelles
-fiches reprises.
+au dépôt `app-idf-immo` : une seule session à la fois doit le modifier. Le projet
+séparé `bhyshzolavkgcdtdfrkj` n'a plus aucune raison d'exister.
 
 ## État du projet
 
